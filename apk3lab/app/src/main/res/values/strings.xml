@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">apk3lab</string>
+    <string name="placeholder">apk3lab</string>
+    <string name="Sounds">apk3lab</string>
+    <string name="Sound1">apk3lab</string>
+    <string name="Sound2">apk3lab</string>
+    <string name="Sound3">apk3lab</string>
+    <string name="Sound4">Sound4</string>
+    <string name="set_sound">set_sound</string>
+    <string name="current_sound_str">current_sound_str</string>
+    <string name="back_message">back_message</string>
+</resources>
