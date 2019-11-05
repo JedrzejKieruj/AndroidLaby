@@ -32,7 +32,7 @@ public class TaskListContent {
         }
     }
 
-    private static void addItem(Task item) {
+    public static void addItem(Task item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.id, item);
     }
