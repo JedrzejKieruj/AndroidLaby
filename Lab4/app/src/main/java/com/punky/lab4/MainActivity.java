@@ -12,7 +12,7 @@ import android.widget.Spinner;
 
 import com.punky.lab4.tasks.TaskListContent;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements ItemFragment.OnListFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,5 +50,15 @@ public class MainActivity extends AppCompatActivity {
 
         InputMethodManager imn = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imn.hideSoftInputFromWindow(view.getWindowToken(),0);
+    }
+
+    @Override
+    public void onListFragmentClickInteraction(Task task, int position) {
+
+    }
+
+    @Override
+    public void onListFragmentLongClickInteration(int position) {
+
     }
 }
