@@ -65,6 +65,7 @@ public class TaskListContent {
             this.details = details;
             this.picPath = "";
         }
+
         public Task(String id, String title, String details, String picPath) {
             this.id = id;
             this.title = title;

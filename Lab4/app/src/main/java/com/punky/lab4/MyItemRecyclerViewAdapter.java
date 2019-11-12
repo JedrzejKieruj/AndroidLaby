@@ -10,7 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.punky.lab4.ItemFragment.OnListFragmentInteractionListener;
+import com.punky.lab4.TaskFragment.OnListFragmentInteractionListener;
 import com.punky.lab4.tasks.TaskListContent;
 import com.punky.lab4.tasks.TaskListContent.DummyItem;
 
@@ -23,10 +23,10 @@ import java.util.List;
  */
 public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecyclerViewAdapter.ViewHolder> {
 
-    private final List<DummyItem> mValues;
+    private final List<TaskListContent.Task> mValues;
     private final OnListFragmentInteractionListener mListener;
 
-    public MyItemRecyclerViewAdapter(List<DummyItem> items, OnListFragmentInteractionListener listener) {
+    public MyItemRecyclerViewAdapter(List<TaskListContent.Task> items, OnListFragmentInteractionListener listener) {
         mValues = items;
         mListener = listener;
     }
@@ -42,7 +42,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
     public void onBindViewHolder(final ViewHolder holder, final int position) {
         TaskListContent.Task task = mValues.get(position);
         holder.mItem = task;
-        holder.mItem = mValues.get(position);
+        //holder.mItem = mValues.get(position);
 
         holder.mContentView.setText(task.title);
         final String picPath = task.picPath;
@@ -97,15 +97,15 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
 
     public class ViewHolder extends RecyclerView.ViewHolder {
         public final View mView;
-        public final TextView getmContentView;
+        public final TextView mContentView;
         public final ImageView mItemImageView;
         public TaskListContent.Task mItem;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
-            mItemImageView = (TextView) view.findViewById(R.id.item_number);
-            mContentView = (TextView) view.findViewById(R.id.content);
+            mItemImageView = view.findViewById(R.id.item_image);
+            mContentView = view.findViewById(R.id.content);
         }
 
         @Override

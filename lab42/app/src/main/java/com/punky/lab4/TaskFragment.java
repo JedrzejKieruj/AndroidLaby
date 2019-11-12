@@ -18,22 +18,23 @@ import android.view.ViewGroup;
  * Activities containing this fragment MUST implement the {@link OnListFragmentInteractionListener}
  * interface.
  */
-public class ItemFragment extends Fragment {
+public class TaskFragment extends Fragment {
 
     // TODO: Customize parameters
 
-    private MyItemRecyclerViewAdapter mRecyclerViewAdapter;
     private OnListFragmentInteractionListener mListener;
+    private MyTaskRecyclerViewAdapter mRecyclerViewAdapter;
+
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
      * fragment (e.g. upon screen orientation changes).
      */
-
-    public void notifyDataChange(){
-        mRecyclerViewAdapter.notifyDataSetChanged();
+    public TaskFragment() {
+        public void notifyDataChange(){
+            mRecyclerViewAdapter.notifyDataSetChanged();
+        }
     }
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -42,16 +43,17 @@ public class ItemFragment extends Fragment {
     }
 
     @Override
-    public View onCreateView(@NonNull LayoutInflater, ViewGroup container,
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_item_list, container, attachToRoot: false);
+        View view = inflater.inflate(R.layout.fragment_task_list, container, false);
 
         // Set the adapter
         if (view instanceof RecyclerView) {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            mRecyclerViewAdapter.setAdapter(mRecyclerViewAdapter)
+            mRecyclerViewAdapter = new MyTaskRecyclerViewAdapter(TaskListContent.ITEMS, mListener);
+            recyclerView.setAdapter(mRecyclerViewAdapter);
         }
         return view;
     }
@@ -87,6 +89,7 @@ public class ItemFragment extends Fragment {
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         void onListFragmentClickInteraction(Task task, int position);
-        void onListFragmentLongClickInteration(int position);
+        void onListFragmentLongClickInteraction(int position);
     }
+
 }

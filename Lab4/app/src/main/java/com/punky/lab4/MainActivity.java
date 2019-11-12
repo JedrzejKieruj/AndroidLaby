@@ -5,14 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
-import android.view.inputmethod.InputMethod;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.punky.lab4.tasks.TaskListContent;
 
-public class MainActivity extends AppCompatActivity implements ItemFragment.OnListFragmentInteractionListener{
+public class MainActivity extends AppCompatActivity implements TaskFragment.OnListFragmentInteractionListener{
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,7 +52,7 @@ public class MainActivity extends AppCompatActivity implements ItemFragment.OnLi
     }
 
     @Override
-    public void onListFragmentClickInteraction(Task task, int position) {
+    public void onListFragmentClickInteraction(TaskListContent.Task task, int position) {
 
     }
 
