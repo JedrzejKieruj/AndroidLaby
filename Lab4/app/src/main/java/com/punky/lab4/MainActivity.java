@@ -3,15 +3,18 @@ package com.punky.lab4;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.punky.lab4.tasks.TaskListContent;
 
 public class MainActivity extends AppCompatActivity implements TaskFragment.OnListFragmentInteractionListener{
+    public static final String taskExtra = "taskExtra";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -50,14 +53,20 @@ public class MainActivity extends AppCompatActivity implements TaskFragment.OnLi
         InputMethodManager imn = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imn.hideSoftInputFromWindow(view.getWindowToken(),0);
     }
-
-    @Override
-    public void onListFragmentClickInteraction(TaskListContent.Task task, int position) {
-
+    private void startSecondActivity(TaskListContent.Task task, int position) {
+        Intent intent = new Intent(this, TaskInfoActivity.class);
+        intent.putExtra(taskExtra, task);
+        startActivity(intent);
     }
 
     @Override
-    public void onListFragmentLongClickInteration(int position) {
+    public void onListFragmentClickInteraction(TaskListContent.Task task, int position) {
+        Toast.makeText(this,getString(R.string.item_selected_msg),Toast.LENGTH_SHORT).show();
+        startSecondActivity(task,position);
+    }
+
+    @Override
+    public void onListFragmentLongClickInteraction(int position) {
 
     }
 }

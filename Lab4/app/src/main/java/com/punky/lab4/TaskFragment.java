@@ -53,7 +53,8 @@ public class TaskFragment extends Fragment {
             Context context = view.getContext();
             RecyclerView recyclerView = (RecyclerView) view;
             recyclerView.setLayoutManager(new LinearLayoutManager(context));
-            mRecyclerViewAdapter.setAdapter(mRecyclerViewAdapter);
+            mRecyclerViewAdapter = new MyItemRecyclerViewAdapter(TaskListContent.ITEMS,mListener);
+            recyclerView.setAdapter(mRecyclerViewAdapter);
         }
         return view;
     }
@@ -89,6 +90,6 @@ public class TaskFragment extends Fragment {
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         void onListFragmentClickInteraction(TaskListContent.Task task, int position);
-        void onListFragmentLongClickInteration(int position);
+        void onListFragmentLongClickInteraction(int position);
     }
 }
