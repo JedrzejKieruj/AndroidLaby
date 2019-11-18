@@ -14,4 +14,6 @@
     <string name="item_selected_msg" />
     <string name="default_title">DEFAULTTITLE</string>
     <string name="default_description">DEFAULTDESCTR</string>
+    <string name="long_click_msg">dlugawiadomoscclick</string>
+    <string name="delete_dialog_tag">znaczekusuwania</string>
 </resources>

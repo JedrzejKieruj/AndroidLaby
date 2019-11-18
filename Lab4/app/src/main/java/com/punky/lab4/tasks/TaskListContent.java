@@ -112,4 +112,9 @@ public class TaskListContent {
             parcel.writeString(picPath);
         }
     }
+    public static void removeItem(int position) {
+        String itemId = ITEMS.get(position).id;
+        ITEMS.remove(position);
+        ITEM_MAP.remove(itemId);
+    }
 }
