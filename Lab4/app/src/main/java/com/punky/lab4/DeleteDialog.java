@@ -76,7 +76,6 @@ public class DeleteDialog extends DialogFragment {
         // TODO: Update argument type and name
         void onDialogPositiveClick(DialogFragment dialog);
         void onDialogNegativeClick(DialogFragment dialog);
-
     }
     static DeleteDialog newInstance() {
         return new DeleteDialog();

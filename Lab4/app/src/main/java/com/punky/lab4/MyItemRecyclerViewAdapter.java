@@ -7,6 +7,7 @@ import android.graphics.drawable.Drawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -87,6 +88,17 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
             }
         });
 
+        holder.delButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (null != mListener) {
+                    // Notify the active callbacks interface (the activity, if the
+                    // fragment is attached to one) that an item has been selected.
+                    mListener.onListDeleteButton(position);
+                }
+            }
+        });
+
     }
 
     @Override
@@ -99,12 +111,14 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         public final TextView mContentView;
         public final ImageView mItemImageView;
         public TaskListContent.Task mItem;
+        public final Button delButton;
 
         public ViewHolder(View view) {
             super(view);
             mView = view;
             mItemImageView = view.findViewById(R.id.item_image);
             mContentView = view.findViewById(R.id.content);
+            delButton = view.findViewById(R.id.deleteContact);
         }
 
         @Override

@@ -91,5 +91,6 @@ public class TaskFragment extends Fragment {
         // TODO: Update argument type and name
         void onListFragmentClickInteraction(TaskListContent.Task task, int position);
         void onListFragmentLongClickInteraction(int position);
+        void onListDeleteButton(int position);
     }
 }

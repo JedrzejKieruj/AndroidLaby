@@ -68,6 +68,11 @@ public class MainActivity extends AppCompatActivity
         intent.putExtra(taskExtra, task);
         startActivity(intent);
     }
+    private void startEntryScreen(TaskListContent.Task task, int position) {
+        Intent intent = new Intent(this, TaskInfoActivity.class);
+        intent.putExtra(taskExtra, task);
+        startActivity(intent);
+    }
     private void displayTaskInFragment(TaskListContent.Task task){
         TaskInfoFragment taskInfoFragment = ((TaskInfoFragment) getSupportFragmentManager().findFragmentById(R.id.displayFragment));
         if(taskInfoFragment != null) {
@@ -77,7 +82,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentClickInteraction(TaskListContent.Task task, int position) {
-        Toast.makeText(this, getString(R.string.item_selected_msg) + position, Toast.LENGTH_SHORT).show();
+        //Toast.makeText(this, getString(R.string.item_selected_msg) + position, Toast.LENGTH_SHORT).show();
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             displayTaskInFragment(task);
         }else {
@@ -91,6 +96,13 @@ public class MainActivity extends AppCompatActivity
         showDeleteDialog();
         currentItemPosition = position;
     }
+
+    @Override
+    public void onListDeleteButton(int position) {
+        showDeleteDialog();
+        currentItemPosition = position;
+    }
+
     private void showDeleteDialog() {
         DeleteDialog.newInstance().show(getSupportFragmentManager(), getString(R.string.delete_dialog_tag));
     }
@@ -98,7 +110,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
-        View v = findViewById(R.id.addButton);
+        View v = findViewById(R.id.floatingActionButton);
         if(v != null) {
             Snackbar.make(v,getString(R.string.delete_cancel_msg), Snackbar.LENGTH_LONG).setAction(getString(R.string.retry_msg), new View.OnClickListener() {
                 @Override
