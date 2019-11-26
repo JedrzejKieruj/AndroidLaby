@@ -3,13 +3,17 @@ package com.punky.lab4;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.punky.lab4.tasks.TaskListContent;
+
+import static java.lang.Math.random;
 
 public class entryScreen extends AppCompatActivity {
 
@@ -17,15 +21,54 @@ public class entryScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entry_screen);
+        Button addconbutt = (Button) findViewById(R.id.addContactButton);
+        addconbutt.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                addClick(view);
+            }
+        });
     }
 
     public void addClick(View view) {
         EditText taskContactName = findViewById(R.id.contactName);
+        String typedContactName = taskContactName.getText().toString();
         EditText taskContactSurname = findViewById(R.id.contactSurname);
+        String typedContactSurname = taskContactSurname.getText().toString();
         EditText taskContactBirthday = findViewById(R.id.contactBirthday);
+        String typedContactBirthday = taskContactBirthday.getText().toString();
         EditText taskContactPhone = findViewById(R.id.contactPhone);
+        String typedContactPhone = taskContactPhone.getText().toString();
 
-        Spinner drawableSpinner = findViewById(R.id.drawableSpinner);
+        Spinner drawableSpinner = findViewById(R.id.spinner);
+        String selectedRingtone = drawableSpinner.getSelectedItem().toString();
+
+        String picPath = "drawable" + (int)(  1 + random() * 5 );
+
+        TaskListContent.addItem(new TaskListContent.Task(typedContactName,
+                    typedContactSurname,
+                    typedContactBirthday,
+                    typedContactPhone,
+                    selectedRingtone,
+                    picPath));
+
+      /*  ((TaskFragment) getSupportFragmentManager().findFragmentById(R.id.taskFragment)).notifyDataChange();
+
+        taskContactName.setText("");
+        taskContactSurname.setText("");
+        taskContactBirthday.setText("");
+        taskContactPhone.setText("");
+
+        InputMethodManager imn = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        imn.hideSoftInputFromWindow(view.getWindowToken(),0);*/
+
+      setResult(RESULT_OK);
+      finish();
+    }
+}
+
+
+        /*
         String taskTitle = taskTitleEditTxt.getText().toString();
         String taskDescription = taskDescriptionEditTxt.getText().toString();
         String selectedImage = drawableSpinner.getSelectedItem().toString();
@@ -49,8 +92,6 @@ public class entryScreen extends AppCompatActivity {
 
         taskTitleEditTxt.setText("");
         taskDescriptionEditTxt.setText("");
+        */
 
-        InputMethodManager imn = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imn.hideSoftInputFromWindow(view.getWindowToken(),0);
-    }
-}
+

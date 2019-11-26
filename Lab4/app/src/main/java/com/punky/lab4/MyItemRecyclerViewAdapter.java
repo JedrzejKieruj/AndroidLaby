@@ -44,29 +44,35 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         holder.mItem = task;
         //holder.mItem = mValues.get(position);
 
-        holder.mContentView.setText(task.title);
+        holder.mContentView.setText(task.contactName);
         final String picPath = task.picPath;
         Context context = holder.mView.getContext();
         if(picPath != null && !picPath.isEmpty())  {
             if(picPath.contains("drawable")){
                 Drawable taskDrawable;
                 switch (picPath)  {
-                    case "drawable 1":
-                        taskDrawable = context.getResources().getDrawable(R.drawable.circle_drawable_green);
+                    case "drawable1":
+                        taskDrawable = context.getResources().getDrawable(R.drawable.drawable1);
                         break;
-                    case "drawable 2":
-                        taskDrawable = context.getResources().getDrawable(R.drawable.circle_drawable_orange);
+                    case "drawable2":
+                        taskDrawable = context.getResources().getDrawable(R.drawable.drawable2);
                         break;
-                    case "drawable 3":
-                        taskDrawable = context.getResources().getDrawable(R.drawable.circle_drawable_red);
+                    case "drawable3":
+                        taskDrawable = context.getResources().getDrawable(R.drawable.drawable3);
+                        break;
+                    case "drawable4":
+                        taskDrawable = context.getResources().getDrawable(R.drawable.drawable4);
+                        break;
+                    case "drawable5":
+                        taskDrawable = context.getResources().getDrawable(R.drawable.drawable5);
                         break;
                     default:
-                        taskDrawable = context.getResources().getDrawable(R.drawable.circle_drawable_green);
+                        taskDrawable = context.getResources().getDrawable(R.drawable.drawable1);
                 }
                 holder.mItemImageView.setImageDrawable(taskDrawable);
             }
         }else{
-            holder.mItemImageView.setImageDrawable(context.getResources().getDrawable(R.drawable.circle_drawable_green));
+            holder.mItemImageView.setImageDrawable(context.getResources().getDrawable(R.drawable.drawable1));
         }
 
 
@@ -83,7 +89,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                mListener.onListFragmentLongClickInteraction(position);
+                mListener.onListFragmentLongClickInteraction(holder.mItem,position);
                 return false;
             }
         });

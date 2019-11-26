@@ -3,10 +3,9 @@
     <string name="task_title" />
     <string name="task_description" />
     <string name="add_task" />
-    <string-array name="images">
-        <item>drawable 1</item>
-        <item>drawable 2</item>
-        <item>drawable 3</item>
+    <string-array name="ringtones">
+        <item>ringtone 1</item>
+        <item>ringtone 2</item>
     </string-array>
 
     <!-- TODO: Remove or change this placeholder text -->

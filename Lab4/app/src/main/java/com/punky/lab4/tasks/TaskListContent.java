@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static java.lang.Math.random;
+
 /**
  * Helper class for providing sample content for user interfaces created by
  * Android template wizards.
@@ -28,27 +30,27 @@ public class TaskListContent {
 
     private static final int COUNT = 5;
 
-    static {
+    /* static {
         // Add some sample items.
         for (int i = 1; i <= COUNT; i++) {
             addItem(createDummyItem(i));
         }
-    }
+    } */
 
     public static void addItem(Task item) {
         ITEMS.add(item);
-        ITEM_MAP.put(item.id, item);
+        ITEM_MAP.put(item.contactName, item);
     }
 
-    private static Task createDummyItem(int position) {
+     /* private static Task createDummyItem(int position) {
         return new Task(String.valueOf(position), "Item " + position, makeDetails(position));
-    }
+    } */
 
     private static String makeDetails(int position) {
         StringBuilder builder = new StringBuilder();
         builder.append("Details about Item: ").append(position);
         for (int i = 0; i < position; i++) {
-            builder.append("\nMore details information here.");
+            builder.append("\nMore contactBirthday information here.");
         }
         return builder.toString();
     }
@@ -57,29 +59,31 @@ public class TaskListContent {
      * A dummy item representing a piece of content.
      */
     public static class Task implements Parcelable {
-        public final String id;
-        public final String title;
-        public final String details;
+        public final String contactName;
+        public final String contactSurname;
+        public final String contactBirthday;
+        public final String contactPhone;
+        public final String contactRingtone;
         public final String picPath;
 
-        public Task(String id, String title, String details) {
-            this.id = id;
-            this.title = title;
-            this.details = details;
-            this.picPath = "";
-        }
-        public Task(String id, String title, String details, String picPath) {
-            this.id = id;
-            this.title = title;
-            this.details = details;
+        public Task(String contactName, String contactSurname, String contactPhone, String contactBirthday, String contactRingtone, String picPath) {
+            this.contactName = contactName;
+            this.contactSurname = contactSurname;
+            this.contactBirthday = contactBirthday;
+            this.contactPhone = contactPhone;
+            this.contactRingtone = contactRingtone;
             this.picPath = picPath;
+
         }
 
+
         protected Task(Parcel in) {
-            id = in.readString();
-            title = in.readString();
-            details = in.readString();
-            picPath = in.readString();
+            contactName = in.readString();
+            contactSurname = in.readString();
+            contactBirthday = in.readString();
+            contactPhone = in.readString();
+            contactRingtone = in.readString();
+            picPath = "drawable" + (int)(  1 + random() * 5 );
         }
 
         public static final Creator<Task> CREATOR = new Creator<Task>() {
@@ -96,7 +100,7 @@ public class TaskListContent {
 
         @Override
         public String toString() {
-            return title;
+            return contactSurname;
         }
 
         @Override
@@ -106,14 +110,15 @@ public class TaskListContent {
 
         @Override
         public void writeToParcel(Parcel parcel, int i) {
-            parcel.writeString(id);
-            parcel.writeString(title);
-            parcel.writeString(details);
+            parcel.writeString(contactName);
+            parcel.writeString(contactSurname);
+            parcel.writeString(contactBirthday);
+            parcel.writeString(contactPhone);
             parcel.writeString(picPath);
         }
     }
     public static void removeItem(int position) {
-        String itemId = ITEMS.get(position).id;
+        String itemId = ITEMS.get(position).contactName;
         ITEMS.remove(position);
         ITEM_MAP.remove(itemId);
     }

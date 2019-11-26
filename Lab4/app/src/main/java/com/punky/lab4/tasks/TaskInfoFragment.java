@@ -3,12 +3,14 @@ package com.punky.lab4.tasks;
 
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
+import android.media.MediaPlayer;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentActivity;
 
+import android.provider.MediaStore;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,6 +19,9 @@ import android.widget.TextView;
 
 import com.punky.lab4.MainActivity;
 import com.punky.lab4.R;
+import com.punky.lab4.TaskInfoActivity;
+
+import static java.lang.Math.random;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -34,29 +39,32 @@ public class TaskInfoFragment extends Fragment {
         TextView taskInfoDescription = activity.findViewById(R.id.taskInfoDescription);
         ImageView taskInfoImage = activity.findViewById(R.id.taskInfoImage);
 
-        taskInfoTitle.setText(task.title);
-        taskInfoDescription.setText(task.details);
-        if(task.picPath != null && !task.picPath.isEmpty()){
-            if(task.picPath.contains("drawable")) {
-                Drawable taskDrawable;
-                switch (task.picPath) {
-                    case "drawable 1":
-                        taskDrawable = activity.getResources().getDrawable(R.drawable.circle_drawable_green);
+        taskInfoTitle.setText(task.contactSurname);
+        taskInfoDescription.setText(task.contactBirthday);
+        MediaPlayer ringtone;
+/*
+        if(task.contactRingtone != null && !task.contactRingtone.isEmpty()){
+            if(task.contactRingtone.contains("ringtone")) {
+                switch (task.contactRingtone) {
+                    case "ringtone 1":
+                        ringtone = MediaPlayer.create(TaskInfoFragment.this, R.raw.dance_monkey);
                         break;
-                    case "drawable 2":
-                        taskDrawable = activity.getResources().getDrawable(R.drawable.circle_drawable_orange);
-                        break;
-                    case "drawable 3":
-                        taskDrawable = activity.getResources().getDrawable(R.drawable.circle_drawable_red);
+                    case "ringtone 2":
+                        ringtone = MediaPlayer.create(TaskInfoFragment.this, R.raw.ona_by_tak_chciala_);
                         break;
                     default:
-                        taskDrawable = activity.getResources().getDrawable(R.drawable.circle_drawable_green);
+                        ringtone = MediaPlayer.create(TaskInfoFragment.this, R.raw.dance_monkey);
                 }
-                taskInfoImage.setImageDrawable(taskDrawable);
             }else {
+                ringtone.
                 taskInfoImage.setImageDrawable(activity.getResources().getDrawable(R.drawable.circle_drawable_green));
             }
         }
+
+        String picPath = "drawable" + (int)(  1 + random() * 5 );
+        int PersonPicID = getResources().getIdentifier(picPath, "drawable", getPackageName());
+        taskInfoImage.setImageDrawable(taskDrawable);*/
+
     }
 
 

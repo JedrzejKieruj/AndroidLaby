@@ -1,11 +1,13 @@
 package com.punky.lab4;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.DialogFragment;
 
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Bundle;
 import android.view.View;
@@ -14,6 +16,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import com.punky.lab4.tasks.TaskInfoFragment;
 import com.punky.lab4.tasks.TaskListContent;
@@ -25,14 +28,23 @@ public class MainActivity extends AppCompatActivity
 {
     public static final String taskExtra = "taskExtra";
     private  int currentItemPosition = -1;
+    private FloatingActionButton floatbut;
+    private int reqCode = 100;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        floatbut = (FloatingActionButton) findViewById(R.id.floatingActionButtonEntryScreen);
+        floatbut.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                startEntryScreen();
+            }
+        });
     }
 
-    public void addClick(View view) {
+    /* public void addClick(View view) {
         EditText taskTitleEditTxt = findViewById(R.id.taskTitle);
         EditText taskDescriptionEditTxt = findViewById(R.id.taskDescription);
         Spinner drawableSpinner = findViewById(R.id.drawableSpinner);
@@ -62,17 +74,28 @@ public class MainActivity extends AppCompatActivity
 
         InputMethodManager imn = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imn.hideSoftInputFromWindow(view.getWindowToken(),0);
-    }
+
+    } */
     private void startSecondActivity(TaskListContent.Task task, int position) {
         Intent intent = new Intent(this, TaskInfoActivity.class);
         intent.putExtra(taskExtra, task);
         startActivity(intent);
     }
-    private void startEntryScreen(TaskListContent.Task task, int position) {
-        Intent intent = new Intent(this, TaskInfoActivity.class);
-        intent.putExtra(taskExtra, task);
-        startActivity(intent);
+    private void startEntryScreen() {
+        Intent intent = new Intent(this, entryScreen.class);
+        startActivityForResult(intent,reqCode);
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if(requestCode == reqCode){
+            if(resultCode == RESULT_OK){
+                ((TaskFragment) getSupportFragmentManager().findFragmentById(R.id.taskFragment)).notifyDataChange();
+            }
+        }
+    }
+
     private void displayTaskInFragment(TaskListContent.Task task){
         TaskInfoFragment taskInfoFragment = ((TaskInfoFragment) getSupportFragmentManager().findFragmentById(R.id.displayFragment));
         if(taskInfoFragment != null) {
@@ -91,10 +114,15 @@ public class MainActivity extends AppCompatActivity
     }
 
     @Override
-    public void onListFragmentLongClickInteraction(int position) {
-        Toast.makeText(this, getString(R.string.long_click_msg) + position, Toast.LENGTH_SHORT).show();
-        showDeleteDialog();
-        currentItemPosition = position;
+    public void onListFragmentLongClickInteraction(TaskListContent.Task task, int position) {
+        if(task.contactRingtone == "ringtone1"){
+            MediaPlayer ring = MediaPlayer.create(MainActivity.this,R.raw.ringtone1);
+            ring.start();
+        }else{
+            MediaPlayer ring = MediaPlayer.create(MainActivity.this,R.raw.ringtone2);
+            ring.start();
+        }
+
     }
 
     @Override
@@ -110,7 +138,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onDialogNegativeClick(DialogFragment dialog) {
-        View v = findViewById(R.id.floatingActionButton);
+        View v = findViewById(R.id.floatingActionButtonEntryScreen);
         if(v != null) {
             Snackbar.make(v,getString(R.string.delete_cancel_msg), Snackbar.LENGTH_LONG).setAction(getString(R.string.retry_msg), new View.OnClickListener() {
                 @Override
@@ -124,7 +152,7 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onDialogPositiveClick(DialogFragment dialog) {
-        if(currentItemPosition != 1 && currentItemPosition < TaskListContent.ITEMS.size()){
+        if(currentItemPosition != -1 && currentItemPosition < TaskListContent.ITEMS.size()){
             TaskListContent.removeItem(currentItemPosition);
             ((TaskFragment) getSupportFragmentManager().findFragmentById(R.id.taskFragment)).notifyDataChange();
         }
