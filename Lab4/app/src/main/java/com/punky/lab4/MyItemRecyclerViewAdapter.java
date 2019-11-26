@@ -89,7 +89,7 @@ public class MyItemRecyclerViewAdapter extends RecyclerView.Adapter<MyItemRecycl
         holder.mView.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View v) {
-                mListener.onListFragmentLongClickInteraction(holder.mItem,position);
+                mListener.onListFragmentLongClickInteraction(holder.mItem);
                 return false;
             }
         });

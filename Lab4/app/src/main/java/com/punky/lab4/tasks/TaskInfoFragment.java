@@ -37,11 +37,11 @@ public class TaskInfoFragment extends Fragment {
 
         TextView taskInfoTitle = activity.findViewById(R.id.taskInfoTitle);
         TextView taskInfoDescription = activity.findViewById(R.id.taskInfoDescription);
-        ImageView taskInfoImage = activity.findViewById(R.id.taskInfoImage);
+
 
         taskInfoTitle.setText(task.contactSurname);
         taskInfoDescription.setText(task.contactBirthday);
-        MediaPlayer ringtone;
+
 /*
         if(task.contactRingtone != null && !task.contactRingtone.isEmpty()){
             if(task.contactRingtone.contains("ringtone")) {

@@ -10,6 +10,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import com.punky.lab4.tasks.TaskListContent;
 
@@ -21,13 +22,32 @@ public class entryScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entry_screen);
-        Button addconbutt = (Button) findViewById(R.id.addContactButton);
+        Button addconbutt = findViewById(R.id.addContactButton);
+        final EditText limitedPhone =  findViewById(R.id.contactPhone);
+        final EditText limitedDate =  findViewById(R.id.contactBirthday);
         addconbutt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                if(limitedDate.getText().toString().charAt(2) != '.' || limitedDate.getText().toString().charAt(5) != '.' || Integer.parseInt(limitedPhone.getText().toString())  < 9 ){
+                    if(limitedDate.getText().toString().charAt(2) != '.' || limitedDate.getText().toString().charAt(5) != '.'){
+                        Toast.makeText(getApplicationContext(), "Enter valid date in format XX.YY.ZZZZ", Toast.LENGTH_LONG);
+                    }
+                    if(Integer.parseInt(limitedPhone.getText().toString())  < 9){
+                        Toast.makeText(getApplicationContext(), "Phone number must be 9 digits long", Toast.LENGTH_LONG);
+                    }
+                }
                 addClick(view);
             }
         });
+        /*                if(limitedDate.toString().charAt(2) != '.' || limitedDate.toString().charAt(5) != '.' || Integer.parseInt(limitedPhone.toString())  < 9 ){
+                    if(limitedDate.toString().charAt(2) != '.' || limitedDate.toString().charAt(5) != '.'){
+                        Toast.makeText(getApplicationContext(), "Enter valid date in format XX.YY.ZZZZ", Toast.LENGTH_LONG);
+                    }
+                    if(Integer.parseInt(limitedPhone.toString())  < 9){
+                        Toast.makeText(getApplicationContext(), "Phone number must be 9 digits long", Toast.LENGTH_LONG);
+                    }
+                }else {*/
+
     }
 
     public void addClick(View view) {
@@ -43,7 +63,7 @@ public class entryScreen extends AppCompatActivity {
         Spinner drawableSpinner = findViewById(R.id.spinner);
         String selectedRingtone = drawableSpinner.getSelectedItem().toString();
 
-        String picPath = "drawable" + (int)(  1 + random() * 5 );
+        String picPath = "drawable" + (int)(random() * 5 );
 
         TaskListContent.addItem(new TaskListContent.Task(typedContactName,
                     typedContactSurname,

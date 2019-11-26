@@ -43,39 +43,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
-
-    /* public void addClick(View view) {
-        EditText taskTitleEditTxt = findViewById(R.id.taskTitle);
-        EditText taskDescriptionEditTxt = findViewById(R.id.taskDescription);
-        Spinner drawableSpinner = findViewById(R.id.drawableSpinner);
-        String taskTitle = taskTitleEditTxt.getText().toString();
-        String taskDescription = taskDescriptionEditTxt.getText().toString();
-        String selectedImage = drawableSpinner.getSelectedItem().toString();
-
-        if(taskTitle.isEmpty() && taskDescription.isEmpty()){
-            TaskListContent.addItem(new TaskListContent.Task("Task." + TaskListContent.ITEMS.size() + 1,
-                    getString(R.string.default_title),
-                    getString(R.string.default_description),
-                    selectedImage));
-        }else{
-            if(taskTitle.isEmpty())
-                taskTitle = getString(R.string.default_title);
-            if(taskDescription.isEmpty())
-                taskDescription = getString(R.string.default_description);
-            TaskListContent.addItem(new TaskListContent.Task("Task." + TaskListContent.ITEMS.size() + 1,
-                    taskTitle,
-                    taskDescription,
-                    selectedImage));
-        }
-        ((TaskFragment) getSupportFragmentManager().findFragmentById(R.id.taskFragment)).notifyDataChange();
-
-        taskTitleEditTxt.setText("");
-        taskDescriptionEditTxt.setText("");
-
-        InputMethodManager imn = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        imn.hideSoftInputFromWindow(view.getWindowToken(),0);
-
-    } */
+    
     private void startSecondActivity(TaskListContent.Task task, int position) {
         Intent intent = new Intent(this, TaskInfoActivity.class);
         intent.putExtra(taskExtra, task);
@@ -108,14 +76,15 @@ public class MainActivity extends AppCompatActivity
         //Toast.makeText(this, getString(R.string.item_selected_msg) + position, Toast.LENGTH_SHORT).show();
         if(getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             displayTaskInFragment(task);
+
         }else {
             startSecondActivity(task, position);
         }
     }
 
     @Override
-    public void onListFragmentLongClickInteraction(TaskListContent.Task task, int position) {
-        if(task.contactRingtone == "ringtone1"){
+    public void onListFragmentLongClickInteraction(TaskListContent.Task task) {
+        if(task.contactRingtone == "ringtone 1"){
             MediaPlayer ring = MediaPlayer.create(MainActivity.this,R.raw.ringtone1);
             ring.start();
         }else{

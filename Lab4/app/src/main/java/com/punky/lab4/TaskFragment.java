@@ -90,7 +90,7 @@ public class TaskFragment extends Fragment {
     public interface OnListFragmentInteractionListener {
         // TODO: Update argument type and name
         void onListFragmentClickInteraction(TaskListContent.Task task, int position);
-        void onListFragmentLongClickInteraction(TaskListContent.Task task, int position);
+        void onListFragmentLongClickInteraction(TaskListContent.Task task);
         void onListDeleteButton(int position);
     }
 }

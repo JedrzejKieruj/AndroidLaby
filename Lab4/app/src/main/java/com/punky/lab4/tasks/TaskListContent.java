@@ -28,15 +28,6 @@ public class TaskListContent {
      */
     public static final Map<String, Task> ITEM_MAP = new HashMap<String, Task>();
 
-    private static final int COUNT = 5;
-
-    /* static {
-        // Add some sample items.
-        for (int i = 1; i <= COUNT; i++) {
-            addItem(createDummyItem(i));
-        }
-    } */
-
     public static void addItem(Task item) {
         ITEMS.add(item);
         ITEM_MAP.put(item.contactName, item);
@@ -46,13 +37,13 @@ public class TaskListContent {
         return new Task(String.valueOf(position), "Item " + position, makeDetails(position));
     } */
 
-    private static String makeDetails(int position) {
+    private static String makeDetails(int position, TaskListContent.Task task) {
         StringBuilder builder = new StringBuilder();
         builder.append("Details about Item: ").append(position);
         for (int i = 0; i < position; i++) {
             builder.append("\nMore contactBirthday information here.");
         }
-        return builder.toString();
+        return task.contactRingtone;
     }
 
     /**
@@ -98,9 +89,10 @@ public class TaskListContent {
             }
         };
 
+
         @Override
         public String toString() {
-            return contactSurname;
+            return contactRingtone;
         }
 
         @Override
@@ -114,6 +106,7 @@ public class TaskListContent {
             parcel.writeString(contactSurname);
             parcel.writeString(contactBirthday);
             parcel.writeString(contactPhone);
+            parcel.writeString(contactRingtone);
             parcel.writeString(picPath);
         }
     }
