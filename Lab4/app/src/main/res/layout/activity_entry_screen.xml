@@ -29,6 +29,7 @@
         android:layout_marginEnd="8dp"
         android:ems="10"
         android:inputType="date"
+        android:maxLength="10"
         android:text="12.12.1212"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"

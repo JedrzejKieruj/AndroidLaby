@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
-    
+
     private void startSecondActivity(TaskListContent.Task task, int position) {
         Intent intent = new Intent(this, TaskInfoActivity.class);
         intent.putExtra(taskExtra, task);
@@ -84,7 +84,8 @@ public class MainActivity extends AppCompatActivity
 
     @Override
     public void onListFragmentLongClickInteraction(TaskListContent.Task task) {
-        if(task.contactRingtone == "ringtone 1"){
+        // MR: operator == dla stringów nie zadziała. Musi Pan skorzystać z funkcji equals: task.contactRingtone.equals("ringtone 1")
+        if(task.contactRingtone.equals("ringtone 1")){
             MediaPlayer ring = MediaPlayer.create(MainActivity.this,R.raw.ringtone1);
             ring.start();
         }else{

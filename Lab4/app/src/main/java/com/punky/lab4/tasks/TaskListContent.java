@@ -57,7 +57,7 @@ public class TaskListContent {
         public final String contactRingtone;
         public final String picPath;
 
-        public Task(String contactName, String contactSurname, String contactPhone, String contactBirthday, String contactRingtone, String picPath) {
+        public Task(String contactName, String contactSurname, String contactBirthday, String contactPhone, String contactRingtone, String picPath) {
             this.contactName = contactName;
             this.contactSurname = contactSurname;
             this.contactBirthday = contactBirthday;

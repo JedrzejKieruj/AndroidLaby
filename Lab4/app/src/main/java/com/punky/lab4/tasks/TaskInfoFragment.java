@@ -39,8 +39,8 @@ public class TaskInfoFragment extends Fragment {
         TextView taskInfoDescription = activity.findViewById(R.id.taskInfoDescription);
 
 
-        taskInfoTitle.setText(task.contactSurname);
-        taskInfoDescription.setText(task.contactBirthday);
+        taskInfoTitle.setText(task.contactName + " " + task.contactSurname);
+        taskInfoDescription.setText("Birthday: " + task.contactBirthday + "\nPhone: " + task.contactPhone);
 
 /*
         if(task.contactRingtone != null && !task.contactRingtone.isEmpty()){

@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
@@ -23,19 +24,10 @@ public class entryScreen extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_entry_screen);
         Button addconbutt = findViewById(R.id.addContactButton);
-        final EditText limitedPhone =  findViewById(R.id.contactPhone);
-        final EditText limitedDate =  findViewById(R.id.contactBirthday);
         addconbutt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(limitedDate.getText().toString().charAt(2) != '.' || limitedDate.getText().toString().charAt(5) != '.' || Integer.parseInt(limitedPhone.getText().toString())  < 9 ){
-                    if(limitedDate.getText().toString().charAt(2) != '.' || limitedDate.getText().toString().charAt(5) != '.'){
-                        Toast.makeText(getApplicationContext(), "Enter valid date in format XX.YY.ZZZZ", Toast.LENGTH_LONG);
-                    }
-                    if(Integer.parseInt(limitedPhone.getText().toString())  < 9){
-                        Toast.makeText(getApplicationContext(), "Phone number must be 9 digits long", Toast.LENGTH_LONG);
-                    }
-                }
+
                 addClick(view);
             }
         });
@@ -65,12 +57,35 @@ public class entryScreen extends AppCompatActivity {
 
         String picPath = "drawable" + (int)(random() * 5 );
 
-        TaskListContent.addItem(new TaskListContent.Task(typedContactName,
+
+
+        // MR:SPRAWDZENIE POPRAWNOŚCI DANYCH POWINNO BYĆ TUTAJ.
+        // Powinien Pan dodać przypadek else dla if poniżej, który oznaczałby, że dane są poprawne
+        Log.d("log1", String.valueOf(typedContactBirthday.charAt(2)));
+        Log.d("log2", String.valueOf(typedContactBirthday.charAt(5)));
+        Log.d("log3", String.valueOf(typedContactBirthday.charAt(3)));
+        Log.d("log4", String.valueOf(typedContactPhone.length()));
+
+
+        if(typedContactBirthday.charAt(2) != '.' || typedContactBirthday.charAt(5) != '.' || typedContactPhone.length()  < 9 ){
+            if(typedContactBirthday.charAt(2) != '.' || typedContactBirthday.charAt(5) != '.'){
+                Toast.makeText(getApplicationContext(), "Enter valid date in format XX.YY.ZZZZ!", Toast.LENGTH_LONG).show();
+            }
+            if(typedContactPhone.length()  < 9){
+                Toast.makeText(getApplicationContext(), "Phone number must be 9 digits long!", Toast.LENGTH_LONG).show();
+            }
+        }else{
+            TaskListContent.addItem(new TaskListContent.Task(typedContactName,
                     typedContactSurname,
                     typedContactBirthday,
                     typedContactPhone,
                     selectedRingtone,
                     picPath));
+            setResult(RESULT_OK);
+            finish();
+        }
+        // MR: kod poniżej powinien zostać wykonany tylko jeżeli dane są poprawne
+
 
       /*  ((TaskFragment) getSupportFragmentManager().findFragmentById(R.id.taskFragment)).notifyDataChange();
 
@@ -82,8 +97,7 @@ public class entryScreen extends AppCompatActivity {
         InputMethodManager imn = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
         imn.hideSoftInputFromWindow(view.getWindowToken(),0);*/
 
-      setResult(RESULT_OK);
-      finish();
+
     }
 }
 
@@ -113,5 +127,3 @@ public class entryScreen extends AppCompatActivity {
         taskTitleEditTxt.setText("");
         taskDescriptionEditTxt.setText("");
         */
-
-
